@@ -44,8 +44,6 @@ public class SalesOrderController : ControllerBase
     [HttpGet("v1/orders")]
     public async Task<IActionResult> GetSalesOrdersAsync()
     {
-        // var orders = await _salesOrderService.GetSalesOrdersAsync();
-        // var ordersDb = await _context.SalesOrders.ToListAsync(); 
        var ordersDb= await _salesOrderService.GetSalesOrdersAsync();
         try
         {

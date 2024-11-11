@@ -17,15 +17,12 @@ namespace LEGO.Inventory.Capacity.Planning.Services
         public async Task CreateStockTransportOrderAsync(StockTransportOrder stockTransportOrder)
         {
             await _context.StockTransportOrders.AddAsync(stockTransportOrder);
-
              await _context.SaveChangesAsync();
         }
 
        public async  Task<IEnumerable<StockTransportOrder>> GetStockTransportOrdersByLDCAsync(string localDistributionCenterName)
         {
-            // throw new NotImplementedException();
             return await Task.FromResult(_context.StockTransportOrders.Where(sto => sto.LocalDistributionCenterName == localDistributionCenterName).ToList());
-            // return await result;
 
         }
 

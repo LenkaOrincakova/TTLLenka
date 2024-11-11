@@ -11,12 +11,13 @@ namespace LEGO.Inventory.Capacity.Planning.Tests.Services
 {
     public class StockTransportOrderServiceTests
     {
-        private readonly IStorage _storage;
+        private readonly ApiDbContext _context;
         private readonly IStockTransportOrderService _stockTransportOrderService;
-        public StockTransportOrderServiceTests() 
+        public StockTransportOrderServiceTests(ApiDbContext context) 
         {
-            _storage = new Storage.Storage();
-            _stockTransportOrderService = new StockTransportOrderService(_storage);
+            // _storage = new Storage.Storage();
+            _stockTransportOrderService = new StockTransportOrderService(_context);
+            _context = context;
 
         }
         [Fact]
@@ -29,10 +30,10 @@ namespace LEGO.Inventory.Capacity.Planning.Tests.Services
             var sto2 = new StockTransportOrder("Lego - Star Wars", 15, "LEGO European Distribution Center", ldcName);
             var sto3 = new StockTransportOrder("Lego - Ninjago", 5, "LEGO European Distribution Center", "Other LDC");
 
-            _storage.StockTransportOrders.AddRange(new[] { sto1, sto2, sto3 });
+            _context.StockTransportOrders.AddRange(new[] { sto1, sto2, sto3 });
 
             // Act
-            var result = _stockTransportOrderService.GetStockTransportOrdersByLDC(ldcName);
+            var result = _stockTransportOrderService.GetStockTransportOrdersByLDCAsync(ldcName);
 
             // Assert
             Assert.Equal(2, result.Count);
@@ -49,11 +50,11 @@ namespace LEGO.Inventory.Capacity.Planning.Tests.Services
             var sto = new StockTransportOrder("Lego - Star Wars", 10, "LEGO European Distribution Center", "Western Warehouse Europe");
 
             // Act
-            _stockTransportOrderService.CreateStockTransportOrder(sto);
+            _stockTransportOrderService.CreateStockTransportOrderAsync(sto);
 
             // Assert
-            Assert.Single(_storage.StockTransportOrders);
-            Assert.Contains(sto, _storage.StockTransportOrders);
+            Assert.Single(_context.StockTransportOrders);
+            Assert.Contains(sto, _context.StockTransportOrders);
         }
 
     }

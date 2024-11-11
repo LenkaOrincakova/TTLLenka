@@ -10,14 +10,12 @@ namespace LEGO.Inventory.Capacity.Planning.Services
 {
     public class RegionalDistributionCenterService : IRegionalDistributionCenterService
     {
-        private readonly IStorage _storage;
         private readonly ApiDbContext _context;
 
         private readonly ILogger<RegionalDistributionCenterService> _logger;
         
-        public RegionalDistributionCenterService(IStorage storage, ILogger<RegionalDistributionCenterService> logger, ApiDbContext context)
+        public RegionalDistributionCenterService( ILogger<RegionalDistributionCenterService> logger, ApiDbContext context)
         {
-            _storage = storage;
             _logger = logger;
             _context = context;
         }

@@ -7,15 +7,13 @@ namespace LEGO.Inventory.Capacity.Planning.Services
 {
     public class GoodsReceiptService : IGoodsReceiptService
     {
-        private readonly IStorage _storage;
         private readonly ApiDbContext _context;
 
         private readonly ILogger<GoodsReceipt> _logger;
 
 
-        public GoodsReceiptService(IStorage storage, ILogger<GoodsReceipt> logger, ApiDbContext context)
+        public GoodsReceiptService(ILogger<GoodsReceipt> logger, ApiDbContext context)
         {
-            _storage = storage;
             _logger = logger;
             _context = context;
         }

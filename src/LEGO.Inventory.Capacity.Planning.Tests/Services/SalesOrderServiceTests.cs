@@ -9,11 +9,13 @@ namespace LEGO.Inventory.Capacity.Planning.Tests.Services;
 
 public class SalesOrderServiceTests
 {
+
+    private readonly ApiDbContext context;
     [Fact]
     public void create_sales_order_with_valid_ldc_name()
     {
         // Arrange
-        var mockStorage = new Mock<IStorage>();
+         var mockStorage = new Mock<ApiDbContext>();
         var mockLogger = new Mock<ILogger<SalesOrderService>>();
         var salesOrder = new SalesOrder("Lego - Harry Potter", 10, "Western Warehouse Europe");
 
@@ -28,7 +30,7 @@ public class SalesOrderServiceTests
         var sut = new SalesOrderService(mockStorage.Object, mockLogger.Object);
 
         // Act
-        sut.CreateSalesOrder(salesOrder);
+        sut.CreateSalesOrderAsync(salesOrder);
 
         // Assert
         Assert.Single(mockStorage.Object.SalesOrders);
@@ -54,7 +56,7 @@ public class SalesOrderServiceTests
         var sut = new SalesOrderService(mockStorage.Object, mockLogger.Object);
 
         // Assert
-        var ex = Assert.Throws<Exception>(() => sut.CreateSalesOrder(salesOrder));
+        var ex = Assert.Throws<Exception>(() => sut.CreateSalesOrderAsync(salesOrder));
         Assert.Equal("invalid local distribution center name", ex.Message);
     }
 }
