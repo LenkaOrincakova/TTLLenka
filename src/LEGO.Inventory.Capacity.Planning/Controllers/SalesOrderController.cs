@@ -11,15 +11,13 @@ namespace LEGO.Inventory.Capacity.Planning.Controllers;
 [Authorize]
 public class SalesOrderController : ControllerBase
 {
-    private readonly ApiDbContext _context;
 
     private readonly ISalesOrderService _salesOrderService;
     private readonly IPreparationService _preparationService;
-    public SalesOrderController(ISalesOrderService salesOrderService, IPreparationService preparationService, ApiDbContext context)
+    public SalesOrderController(ISalesOrderService salesOrderService, IPreparationService preparationService)
     {
         _salesOrderService = salesOrderService;
         _preparationService = preparationService;
-        _context = context;
 
     }
 

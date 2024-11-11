@@ -10,8 +10,6 @@ namespace LEGO.Inventory.Capacity.Planning.Controllers;
 [Authorize]
 public class StockTransportOrderController : ControllerBase
 {
-    private readonly ApiDbContext _context;
-
     private readonly IStockTransportOrderService _stockTransportOrderService;
     public StockTransportOrderController(IStockTransportOrderService stockTransportOrderService)
     {
